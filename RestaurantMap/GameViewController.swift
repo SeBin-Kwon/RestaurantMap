@@ -18,7 +18,7 @@ final class GameViewController: UIViewController, UIPickerViewDelegate, UIPicker
     var maxNumber = 1
     var countClap = 0
     var resultText: String {
-        "숫자 \(maxNumber)까지 총 박수는 \(countClap)번 입니다."
+        "숫자 \(maxNumber)까지 총 박수는\n\(countClap)번 입니다."
     }
     
     override func viewDidLoad() {
@@ -67,8 +67,11 @@ final class GameViewController: UIViewController, UIPickerViewDelegate, UIPicker
         clapTextView.textAlignment = .center
         clapTextView.isEditable = false
         clapTextView.isScrollEnabled = false
+        clapTextView.textColor = .systemGray3
+        clapTextView.font = .systemFont(ofSize: 20, weight: .medium)
         resultLabel.textAlignment = .center
         resultLabel.numberOfLines = 0
+        resultLabel.font = .systemFont(ofSize: 35, weight: .bold)
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
