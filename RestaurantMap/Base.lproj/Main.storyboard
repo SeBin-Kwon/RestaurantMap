@@ -76,18 +76,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="utJ-so-yAC">
-                                <rect key="frame" x="16" y="181" width="361" height="50"/>
+                                <rect key="frame" x="16" y="176" width="361" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="evT-ST-En9"/>
+                                    <constraint firstAttribute="height" constant="60" id="evT-ST-En9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r77-YU-QUI">
-                                <rect key="frame" x="16" y="231" width="361" height="337"/>
+                                <rect key="frame" x="16" y="236" width="361" height="342"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ctb-3e-unw">
-                                        <rect key="frame" x="0.0" y="152" width="361" height="33"/>
+                                        <rect key="frame" x="0.0" y="154.66666666666669" width="361" height="33"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -103,7 +103,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👏" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAI-aA-irZ">
-                                <rect key="frame" x="16" y="568" width="361" height="30"/>
+                                <rect key="frame" x="16" y="578" width="361" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -122,8 +122,8 @@
                             <constraint firstItem="lHg-XV-Wxy" firstAttribute="leading" secondItem="c7f-zz-fkO" secondAttribute="leading" constant="100" id="QVa-FV-NDE"/>
                             <constraint firstItem="c7f-zz-fkO" firstAttribute="trailing" secondItem="lHg-XV-Wxy" secondAttribute="trailing" constant="100" id="Zzy-1E-oF4"/>
                             <constraint firstItem="utJ-so-yAC" firstAttribute="centerX" secondItem="Vsg-ns-9F5" secondAttribute="centerX" id="a9M-XW-JcT"/>
-                            <constraint firstItem="utJ-so-yAC" firstAttribute="top" secondItem="lHg-XV-Wxy" secondAttribute="bottom" constant="30" id="bxS-sc-bRc"/>
-                            <constraint firstItem="c7f-zz-fkO" firstAttribute="bottom" secondItem="EAI-aA-irZ" secondAttribute="bottom" constant="220" id="d2H-aK-jGf"/>
+                            <constraint firstItem="utJ-so-yAC" firstAttribute="top" secondItem="lHg-XV-Wxy" secondAttribute="bottom" constant="25" id="bxS-sc-bRc"/>
+                            <constraint firstItem="c7f-zz-fkO" firstAttribute="bottom" secondItem="EAI-aA-irZ" secondAttribute="bottom" constant="210" id="d2H-aK-jGf"/>
                             <constraint firstItem="r77-YU-QUI" firstAttribute="leading" secondItem="c7f-zz-fkO" secondAttribute="leading" constant="16" id="i2J-rt-Q10"/>
                             <constraint firstItem="EAI-aA-irZ" firstAttribute="top" secondItem="r77-YU-QUI" secondAttribute="bottom" id="rAe-KO-dzm"/>
                         </constraints>

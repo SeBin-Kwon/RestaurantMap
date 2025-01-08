@@ -17,23 +17,13 @@ class ViewController: UIViewController, MKMapViewDelegate {
     var annotationList = [MKPointAnnotation]()
     var restaurantDict = [String: [Restaurant]]()
     
-    enum Category: Int, CaseIterable {
+    enum Category: String, CaseIterable {
         case 전체
         case 한식
         case 중식
         case 일식
         case 양식
         case 기타
-        var description: String {
-            switch self {
-            case .전체: return "전체"
-            case .한식: return "한식"
-            case .중식: return "중식"
-            case .일식: return "일식"
-            case .양식: return "양식"
-            case .기타: return "기타"
-            }
-        }
     }
     
     override func viewDidLoad() {
@@ -50,79 +40,70 @@ class ViewController: UIViewController, MKMapViewDelegate {
         guard let filteredList = restaurantDict[title] else { return }
         mapView.removeAnnotations(annotationList)
         annotationList = []
-        for item in filteredList {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
-            annotationList.append(annotation)
-            mapView.addAnnotation(annotation)
+        filteredList.forEach {
+            updateAnnotation($0)
         }
+        displayAllAnnotation()
     }
-    
-//    let handler: ((UIAlertAction) -> Void)? = { action in
-//        guard let title = action.title else { return }
-//        guard let filteredList = restaurantDict[title] else { return }
-//        mapView.removeAnnotations(self.annotationList)
-//        self.annotationList = []
-//        for item in filteredList {
-//            let annotation = MKPointAnnotation()
-//            annotation.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
-//            self.annotationList.append(annotation)
-//            self.mapView.addAnnotation(annotation)
-//        }
-//    }
     
     @objc
     private func displayActionSheet() {
-        print(#function)
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(cancel)
         for i in 0..<Category.allCases.count {
-            guard let category = Category(rawValue: i) else { return }
-            let action = UIAlertAction(title: category.description, style: .default) { action in
+            let category = Category.allCases[i].rawValue
+            let action = UIAlertAction(title: category, style: .default) { action in
                 guard let title = action.title else { return }
                 guard let filteredList = self.restaurantDict[title] else { return }
                 self.mapView.removeAnnotations(self.annotationList)
                 self.annotationList = []
-                for item in filteredList {
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
-                    self.annotationList.append(annotation)
-                    self.mapView.addAnnotation(annotation)
+                filteredList.forEach {
+                    self.updateAnnotation($0)
                 }
+                self.displayAllAnnotation()
             }
             alert.addAction(action)
         }
         present(alert, animated: true)
     }
     
+    private func configureSegmentUI() {
+        for i in 0..<Category.allCases.count {
+            segment.setTitle(Category.allCases[i].rawValue, forSegmentAt: i)
+        }
+    }
+    
+    private func updateAnnotation(_ item: Restaurant) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
+        annotation.title = item.name
+        annotationList.append(annotation)
+        mapView.addAnnotation(annotation)
+    }
+    
+    private func configureMapView() {
+        restaurantList.forEach {
+            updateAnnotation($0)
+            initializeDictionay($0)
+        }
+    }
+    
+    private func initializeDictionay(_ item: Restaurant) {
+        restaurantDict["전체", default: [Restaurant]()].append(item)
+        if item.category == "카페" ||
+            item.category == "분식" ||
+            item.category == "샐러드" {
+            restaurantDict["기타", default: [Restaurant]()].append(item)
+        } else {
+            restaurantDict[item.category, default: [Restaurant]()].append(item)
+        }
+    }
+    
     private func configureNavigationUI() {
         navigationItem.title = "식당 찾기"
         let right = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(displayActionSheet))
         navigationItem.rightBarButtonItem = right
-    }
-    
-    private func configureSegmentUI() {
-        for i in 0..<Category.allCases.count {
-            guard let category = Category(rawValue: i) else { return }
-            segment.setTitle(category.description, forSegmentAt: i)
-        }
-    }
-    
-    private func configureMapView() {
-        for i in 0..<restaurantList.count {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: restaurantList[i].latitude, longitude: restaurantList[i].longitude)
-            annotation.title = restaurantList[i].name
-            annotationList.append(annotation)
-            mapView.addAnnotation(annotation)
-            restaurantDict["전체", default: [Restaurant]()].append(restaurantList[i])
-            if restaurantList[i].category == "카페" || restaurantList[i].category == "분식" || restaurantList[i].category == "샐러드" {
-                restaurantDict["기타", default: [Restaurant]()].append(restaurantList[i])
-            } else {
-                restaurantDict[restaurantList[i].category, default: [Restaurant]()].append(restaurantList[i])
-            }
-        }
     }
     
     func displayAllAnnotation() {

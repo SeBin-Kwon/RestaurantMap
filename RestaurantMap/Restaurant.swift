@@ -57,7 +57,7 @@ struct RestaurantList {
         Restaurant(
             image: "https://search.pstatic.net/common/placeholder.jpg",
             latitude: 37.6551649,
-            longitude: 127.0480795,
+            longitude: 127.0475795,
             name: "스타벅스 창동역점",
             address: "서울 도봉구 마들로13길 61",
             phoneNumber: "1522-3232",
@@ -100,7 +100,7 @@ struct RestaurantList {
         ),
         Restaurant(
             image: "https://search.pstatic.net/common/placeholder.jpg",
-            latitude: 37.6543873,
+            latitude: 37.6548873,
             longitude: 127.0474787,
             name: "샐러디 창동역점",
             address: "서울 도봉구 노해로69길 26",

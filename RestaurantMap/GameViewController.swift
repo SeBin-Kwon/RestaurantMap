@@ -62,8 +62,16 @@ final class GameViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     private func configureUI() {
         titleLabel.font = .systemFont(ofSize: 35, weight: .bold)
-        textField.placeholder = "최대 숫자를 입력해주세요"
         textField.tintColor = .clear
+        let centeredParagraphStyle = NSMutableParagraphStyle()
+        centeredParagraphStyle.alignment = .center
+        textField.attributedPlaceholder = NSAttributedString(string: "최대 숫자를 입력해주세요", attributes: [
+            .foregroundColor: UIColor.lightGray,
+            .font: UIFont.systemFont(ofSize: 25),
+            .paragraphStyle: centeredParagraphStyle
+        ])
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.black.cgColor
         clapTextView.textAlignment = .center
         clapTextView.isEditable = false
         clapTextView.isScrollEnabled = false
