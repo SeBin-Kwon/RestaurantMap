@@ -82,6 +82,11 @@ final class GameViewController: UIViewController, UIPickerViewDelegate, UIPicker
         resultLabel.font = .systemFont(ofSize: 35, weight: .bold)
     }
     
+    @IBAction func tapGestureTapped(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         numberList[row]
     }

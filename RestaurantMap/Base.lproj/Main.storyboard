@@ -111,6 +111,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="c7f-zz-fkO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="c7f-zz-fkO" firstAttribute="trailing" secondItem="r77-YU-QUI" secondAttribute="trailing" constant="16" id="50V-v1-LXA"/>
                             <constraint firstItem="c7f-zz-fkO" firstAttribute="trailing" secondItem="EAI-aA-irZ" secondAttribute="trailing" constant="16" id="5Rd-pi-1mR"/>
@@ -127,6 +128,9 @@
                             <constraint firstItem="r77-YU-QUI" firstAttribute="leading" secondItem="c7f-zz-fkO" secondAttribute="leading" constant="16" id="i2J-rt-Q10"/>
                             <constraint firstItem="EAI-aA-irZ" firstAttribute="top" secondItem="r77-YU-QUI" secondAttribute="bottom" id="rAe-KO-dzm"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1u0-yh-5mP" appends="YES" id="DjU-dq-j7L"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="clapTextView" destination="ctb-3e-unw" id="w04-dI-kio"/>
@@ -136,6 +140,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dqw-oT-ibA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1u0-yh-5mP">
+                    <connections>
+                        <action selector="tapGestureTapped:" destination="LE4-DR-LAU" id="ZHf-Mo-WM2"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1753.4351145038167" y="4.9295774647887329"/>
         </scene>
