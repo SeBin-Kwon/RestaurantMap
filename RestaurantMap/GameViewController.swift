@@ -7,23 +7,79 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+final class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var textField: UITextField!
+    @IBOutlet var clapTextView: UITextView!
+    @IBOutlet var resultLabel: UILabel!
+    let pickerView = UIPickerView()
+    let numberList = Array(1...100).reversed().map { String($0) }
+    var maxNumber = 1
+    var countClap = 0
+    var resultText: String {
+        "숫자 \(maxNumber)까지 총 박수는 \(countClap)번 입니다."
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        textField.inputView = pickerView
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        configureUI()
     }
-    */
-
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        clapTextView.text = ""
+        countClap = 0
+        guard let max = Int(numberList[row]) else { return }
+        guard clapTextView.text != nil else { return }
+        maxNumber = max
+        changeNumToClap(max: max)
+        resultLabel.text = resultText
+    }
+    
+    private func changeNumToClap(max: Int) {
+        guard clapTextView.text != nil else { return }
+        let range = 1...max
+        for i in range {
+            let strNumArray = Array(String(i))
+            var clapNum = ""
+            for strNum in strNumArray {
+                if strNum == "3" || strNum == "6" || strNum == "9" {
+                    clapNum += "👏"
+                    countClap += 1
+                } else {
+                    clapNum += String(strNum)
+                }
+            }
+            if i != max {
+                clapNum += ", "
+            }
+            clapTextView.text += clapNum
+        }
+    }
+    
+    private func configureUI() {
+        titleLabel.font = .systemFont(ofSize: 35, weight: .bold)
+        textField.placeholder = "최대 숫자를 입력해주세요"
+        textField.tintColor = .clear
+        clapTextView.textAlignment = .center
+        clapTextView.isEditable = false
+        clapTextView.isScrollEnabled = false
+        resultLabel.textAlignment = .center
+        resultLabel.numberOfLines = 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        numberList[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        numberList.count
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
 }
